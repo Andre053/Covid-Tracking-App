@@ -40,7 +40,7 @@ def query_summary(data):
                "hospitalizedCumulative", "inIcuCumulative", "onVentilatorCumulative", "positiveCasesViral")
 
     layout = [
-        [sg.Text("State Information")],
+        [sg.Text("States Selected")],
         [sg.Multiline(table, size=(30, 5), disabled=True)],
         [sg.Text("x Variable"), sg.Combo(values=columns,
                                          key="-X_SELECTION-", size=(30, 5), readonly=True)],
@@ -52,7 +52,7 @@ def query_summary(data):
         [sg.Text(key='-GRAPH_TITLE-')],
         # [sg.Graph(background_color="white", canvas_size=(400, 400), graph_bottom_left=(
         #     400, 400), graph_top_right=(0, 0), key="-SCATTER-")],
-        [sg.Multiline(size=(60, 3), disabled=True, key="-STATS-", visible=False)],
+        [sg.Multiline(size=(50, 3), disabled=True, key="-STATS-", visible=False)],
         [sg.Canvas(background_color="white", key="-SCATTER-")]
     ]
 
@@ -66,7 +66,7 @@ def query_summary(data):
         if event in (sg.WIN_CLOSED, '-QUIT-'):  # quit gui
             break
         if event == '-FUNCTION-':
-            window['-GRAPH_TITLE-'].update("Scatter Plot")
+            window['-GRAPH_TITLE-'].update("Query Response")
             choices = (values['-X_SELECTION-'], values['-Y_SELECTION-'])
             graph.plot(choices)  # graph should clear axes on each click
             window['-STATS-'].update(df_class.summary_statistics(choices), visible=True)
